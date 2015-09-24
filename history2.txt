@@ -1,0 +1,77 @@
+
+
+
+iex(3)> Process.get("dog")
+nil
+iex(4)> Process.put("dog","woof")
+nil
+iex(5)> Process.get("dog")
+"woof"
+iex(6)> :true
+true
+iex(7)> x=[:foo,:bar,:baz]
+[:foo, :bar, :baz]
+iex(8)> x[^:foo]
+** (CompileError) iex:8: cannot use ^:foo outside of match clauses
+    (elixir) src/elixir_exp.erl:421: :elixir_exp.expand_arg/2
+    (stdlib) lists.erl:1352: :lists.mapfoldl/3
+    (stdlib) lists.erl:1353: :lists.mapfoldl/3
+    (elixir) src/elixir_exp.erl:430: :elixir_exp.expand_args/2
+    (elixir) src/elixir_exp.erl:476: :elixir_exp.expand_remote/7
+
+iex(8)> true
+true
+iex(9)> false
+false
+iex(10)> :foo |>
+...(10)>     Atom.to_string
+"foo"
+iex(11)> :foo |> Atom.to_string
+"foo"
+iex(12)> for c <- x
+** (CompileError) iex:12: missing do keyword in for comprehension
+    (elixir) src/elixir_for.erl:24: :elixir_for.expand/3
+iex(12)> for c <- x do
+...(12)> IO.
+ANSI                    Stream                  StreamError
+binread/2               binstream/2             binwrite/2
+chardata_to_string/1    getn/2                  getn/3
+gets/2                  inspect/2               inspect/3
+iodata_length/1         iodata_to_binary/1      puts/2
+read/2                  stream/2                write/2
+
+...(12)> IO.puts(c)
+...(12)> end
+foo
+bar
+baz
+[:ok, :ok, :ok]
+iex(13)> x
+[:foo, :bar, :baz]
+iex(14)> for c <- x do
+...(14)> IO.puts(c)
+...(14)> x
+...(14)> end
+foo
+bar
+baz
+[[:foo, :bar, :baz], [:foo, :bar, :baz], [:foo, :bar, :baz]]
+iex(15)> [:_1,:_2,:_3]  |> Enum.map(&Atom.to_string/1) |> Enum.join ", "
+"_1, _2, _3"
+iex(16)> for row <- ?a..?i do
+...(16)> IO.puts(row)
+...(16)> end
+97
+98
+99
+100
+101
+102
+103
+104
+105
+[:ok, :ok, :ok, :ok, :ok, :ok, :ok, :ok, :ok]
+iex(17)> Atom.to_string(:foobar) |> String.at(7)
+nil
+iex(18)> Atom.to_string(:foobarz) |> String.at(7)
+nil
